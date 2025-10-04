@@ -1,5 +1,13 @@
+name: Run Code
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - name: 23f2003834@ds.study.iitm.ac.in
-        run: echo "Hello, world!"
+        run: python code.py
