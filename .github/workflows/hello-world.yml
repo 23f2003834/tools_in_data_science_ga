@@ -1,0 +1,21 @@
+name: Run Python Code
+
+on:
+  push:
+    branches: [ main ]  # Trigger on push to main
+  workflow_dispatch:    # Allow manual trigger
+
+jobs:
+  execute-python:
+    runs-on: ubuntu-latest  # Free runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Clones repo (from marketplace)
+
+      - name: Set up Python
+        uses: actions/setup-python@v5  # Sets up Python environment
+        with:
+          python-version: '3.x'  # Latest Python 3 version
+
+      - name: 23f2003834@ds.study.iitm.ac.in
+        run: python code.py  # Runs your code.py (prints "Hello World")
