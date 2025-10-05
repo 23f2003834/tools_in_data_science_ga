@@ -1,0 +1,35 @@
+name: Run Python Code with Cache
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  execute-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: prime-cache-1fe03f3  # Step to prime/restore/save the cache
+        id: cache-python-deps  # ID to access outputs
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip  # Cache pip dependencies
+          key: cache-1fe03f3-${{ runner.os }}  # Fixed key + OS for uniqueness
+
+      - name: Echo cache hit/miss result
+        run: echo "Cache hit: ${{ steps.cache-python-deps.outputs.cache-hit }}"
+
+      - name: Install dependencies (skip on hit)
+        if: steps.cache-python-deps.outputs.cache-hit != 'true'
+        run: pip install requests  # Install only if miss
+
+      - name: 23f2003834@ds.study.iitm.ac.in  # Your required step from previous task
+        run: python code.py  # Runs code.py (now uses requests)
