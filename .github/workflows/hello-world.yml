@@ -25,7 +25,7 @@ jobs:
           key: cache-1fe03f3-${{ runner.os }}
 
       - name: Echo cache hit/miss result
-        run: echo "Cache hit: ${{ steps.cache-python-deps.outputs.cache-hit }}"
+        run: echo "Cache hit:${{ steps.cache-python-deps.outputs.cache-hit }}"
 
       - name: Install dependencies
         if: steps.cache-python-deps.outputs.cache-hit != 'true'
